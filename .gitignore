@@ -1,2 +1,5 @@
 # Java compile
 *.class
+
+#Submission
+*.zip

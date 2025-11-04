@@ -18,7 +18,10 @@ public class NetworkInfo extends ObjectInfo {
     public NetworkInfo(String ipAddress, int port, String protocol) {
         this.ipAddress = Objects.requireNonNull(ipAddress, "IP address cannot be null");
         this.port = port;
-        this.protocol = Objects.requireNonNull(protocol, "Protocol cannot be null");
+        
+        // Normalize protocol to uppercase (case-insensitive)
+        Objects.requireNonNull(protocol, "Protocol cannot be null");
+        String protocolUpper = protocol.toUpperCase();
         
         // Validate IP address format (IPv4)
         if (!IPV4_PATTERN.matcher(ipAddress).matches()) {
@@ -31,9 +34,12 @@ public class NetworkInfo extends ObjectInfo {
         }
         
         // Validate protocol (must be TCP, UDP, or ICMP)
-        if (!protocol.equals("TCP") && !protocol.equals("UDP") && !protocol.equals("ICMP")) {
+        if (!protocolUpper.equals("TCP") && !protocolUpper.equals("UDP") && !protocolUpper.equals("ICMP")) {
             throw new IllegalArgumentException("Protocol must be TCP, UDP, or ICMP, got: " + protocol);
         }
+        
+        // Store normalized protocol
+        this.protocol = protocolUpper;
     }
 
     public String getIpAddress() {

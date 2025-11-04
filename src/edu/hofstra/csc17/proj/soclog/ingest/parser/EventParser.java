@@ -271,12 +271,13 @@ public class EventParser {
             throw new Exception("Invalid port format: " + portStr);
         }
         
-        // Validate protocol
-        if (!protocol.equals("TCP") && !protocol.equals("UDP") && !protocol.equals("ICMP")) {
+        // Validate protocol (case-insensitive)
+        String protocolUpper = protocol.toUpperCase();
+        if (!protocolUpper.equals("TCP") && !protocolUpper.equals("UDP") && !protocolUpper.equals("ICMP")) {
             throw new Exception("Protocol must be TCP, UDP, or ICMP, got: " + protocol);
         }
         
-        return new NetworkInfo(ip, port, protocol);
+        return new NetworkInfo(ip, port, protocolUpper);
     }
     
     private Map<String, String> parseKeyValuePairs(String data) throws Exception {
