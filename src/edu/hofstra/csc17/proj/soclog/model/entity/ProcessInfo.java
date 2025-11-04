@@ -12,12 +12,23 @@ public final class ProcessInfo extends ObjectInfo {
     private final String modulePath;
     private final String privilege;
 
-    public ProcessInfo(String name, Integer pid, String modulePath, String privilege) {
+    public ProcessInfo(String name, Integer pid, String modulePath, String privilege) { 
         this.name = name;
         this.pid = pid;
         this.modulePath = modulePath;
         this.privilege = validatePrivilege(privilege);
-        // TODO: Add validation for process fields
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Process name cannot be null or empty");
+        }
+        if (pid == null) {
+            throw new IllegalArgumentException("PID cannot be null");
+        }
+        if (pid <= 0) {
+            throw new IllegalArgumentException("PID must be positive, got: " + pid);
+        }
+        if (modulePath == null || modulePath.isEmpty()) {
+            throw new IllegalArgumentException("Module path cannot be null or empty");
+        }
     }
 
     private static String validatePrivilege(String privilege) {

@@ -15,12 +15,28 @@ public final class FileInfo extends ObjectInfo {
         this.path = path;
         this.fileDescriptor = fileDescriptor;
         this.permissions = validatePermissions(permissions);
-        // TODO: Add validation for file fields and canonical path normalization
+        if (path == null || path.isEmpty()) {
+            throw new IllegalArgumentException("File path cannot be null or empty");
+        }
+        if (fileDescriptor == null) {
+            throw new IllegalArgumentException("File descriptor cannot be null");
+        }
+        if (fileDescriptor < 0) {
+            throw new IllegalArgumentException("File descriptor must be non-negative, got: " + fileDescriptor);
+        }
     }
 
     private static String validatePermissions(String permissions) {
-
-        // TODO: Add proper Unix permission validation (e.g., 640, 755)
+        if (permissions == null) {
+            throw new IllegalArgumentException("Permissions cannot be null");
+        }
+        
+        // Validate 3-digit octal format (e.g., 640, 755)
+        if (!permissions.matches("^[0-7]{3}$")) {
+            throw new IllegalArgumentException(
+                "Permissions must be a 3-digit octal string (e.g., '640', '755'), got: " + permissions);
+        }
+        
         return permissions;
     }
 
