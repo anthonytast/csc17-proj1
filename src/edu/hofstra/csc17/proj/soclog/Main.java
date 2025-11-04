@@ -56,8 +56,13 @@ public final class Main {
 
         System.out.println("Valid events: " + summary.getEvents().size());
         System.out.println("Rejections: " + summary.getErrors().size());
+        
+        // Print all rejection errors
         if (!summary.getErrors().isEmpty()) {
-            System.out.println("Sample rejection: " + summary.getErrors().get(0));
+            System.out.println("\nAll rejections:");
+            for (int i = 0; i < summary.getErrors().size(); i++) {
+                System.out.println("  " + (i + 1) + ". " + summary.getErrors().get(i));
+            }
         }
 
         // Demonstrate analytics functionality
