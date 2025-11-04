@@ -28,9 +28,9 @@ public class NetworkInfo extends ObjectInfo {
             throw new IllegalArgumentException("Invalid IPv4 address format: " + ipAddress);
         }
         
-        // Validate port range (1-65535)
-        if (port < 1 || port > 65535) {
-            throw new IllegalArgumentException("Port must be between 1-65535, got: " + port);
+        // Validate port range (0-65535, where 0 is a wildcard)
+        if (port < 0 || port > 65535) {
+            throw new IllegalArgumentException("Port must be between 0-65535, got: " + port);
         }
         
         // Validate protocol (must be TCP, UDP, or ICMP)

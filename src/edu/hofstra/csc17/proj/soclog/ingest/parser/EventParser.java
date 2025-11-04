@@ -264,8 +264,8 @@ public class EventParser {
         int port;
         try {
             port = Integer.parseInt(portStr);
-            if (port < 1 || port > 65535) {
-                throw new Exception("Port must be between 1-65535, got: " + port);
+            if (port < 0 || port > 65535) {
+                throw new Exception("Port must be between 0-65535, got: " + port);
             }
         } catch (NumberFormatException e) {
             throw new Exception("Invalid port format: " + portStr);
