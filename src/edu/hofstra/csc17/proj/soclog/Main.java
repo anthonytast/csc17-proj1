@@ -63,7 +63,7 @@ public final class Main {
         // Demonstrate analytics functionality
         AnalyticsEngine engine = new AnalyticsEngine(summary.getEvents());
         System.out.println();
-        System.out.println("=== Analytics Engine Demo ===");
+        System.out.println("Analytics Engine Demo");
 
         // Basic analytics
         demonstrateBasicAnalytics(engine);
