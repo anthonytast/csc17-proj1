@@ -187,7 +187,7 @@ public class AnalyticsEngine {
             ));
     }
 
-    // ANOMALY DETECTION
+    // ========== ANOMALY DETECTION ==========
 
     /**
      * Identify processes with privilege escalation patterns (user -> root transitions).

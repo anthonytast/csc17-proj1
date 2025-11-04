@@ -85,7 +85,11 @@ public class LogIngestorTest {
 
         IngestionResult result = ingestor.ingest(Arrays.asList(dataFile));
         assertNotNull(result);
+
+        // Verify some events were ingested
         assertTrue(result.getEvents().size() > 0);
+
+        // Print summary to see ingestion statistics
         result.printIngestionSummary();
     }
     
